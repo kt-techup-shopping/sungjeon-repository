@@ -52,7 +52,8 @@ public class User extends BaseEntity {
 	}
 
 	public static User normalUser(String loginId, String password, String name, String email, String mobile,
-		Gender gender, LocalDate birthday, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		Gender gender,
+		LocalDate birthday, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		return new User(
 			loginId,
 			password,
@@ -67,8 +68,8 @@ public class User extends BaseEntity {
 		);
 	}
 
-	public static User admin(String loginId, String password, String name, String email, String mobile,
-		Gender gender, LocalDate birthday, LocalDateTime createdAt, LocalDateTime updatedAt) {
+	public static User admin(String loginId, String password, String name, String email, String mobile, Gender gender,
+		LocalDate birthday, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		return User.admin(
 			loginId,
 			password,

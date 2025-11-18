@@ -21,8 +21,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Tag(name = "Product")
-@RequestMapping("/products")
 @RestController
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController extends SwaggerAssistance {
 	private final ProductService productService;
@@ -35,44 +35,48 @@ public class ProductController extends SwaggerAssistance {
 			request.getPrice(),
 			request.getQuantity()
 		);
+
 		return ApiResult.ok();
 	}
 
 	@PutMapping("/{id}")
 	public ApiResult<Void> update(
 		@PathVariable Long id,
-		@RequestBody @Valid ProductRequest.Update request) {
+		@RequestBody @Valid ProductRequest.Update request
+	) {
 		productService.update(
 			id,
 			request.getName(),
 			request.getPrice(),
 			request.getQuantity()
 		);
+
 		return ApiResult.ok();
 	}
 
 	@PatchMapping("/{id}/sold-out")
-	public ApiResult<Void> soldOut(@PathVariable Long id) {
+	public void soldOut(@PathVariable Long id) {
 		productService.soldOut(id);
-		return ApiResult.ok();
 	}
 
 	@PatchMapping("/{id}/activate")
 	public ApiResult<Void> activate(@PathVariable Long id) {
 		productService.activate(id);
+
 		return ApiResult.ok();
 	}
 
 	@PatchMapping("/{id}/in-activate")
 	public ApiResult<Void> inActivate(@PathVariable Long id) {
 		productService.inActivate(id);
+
 		return ApiResult.ok();
 	}
 
 	@DeleteMapping("/{id}")
-	public ApiResult<Void> delete(@PathVariable Long id) {
+	public ApiResult<Void> remove(@PathVariable Long id) {
 		productService.delete(id);
+
 		return ApiResult.ok();
 	}
-
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.common.ApiResult;
 import com.kt.dto.order.OrderRequest;
-import com.kt.security.CurrentUser;
+import com.kt.security.DefaultCurrentUser;
 import com.kt.service.OrderService;
 
 import jakarta.validation.Valid;
@@ -23,10 +23,10 @@ public class OrderController {
 	//주문생성
 	@PostMapping
 	public ApiResult<Void> create(
-		@AuthenticationPrincipal CurrentUser currentUser,
+		@AuthenticationPrincipal DefaultCurrentUser defaultCurrentUser,
 		@RequestBody @Valid OrderRequest.Create request) {
 		orderService.create(
-			currentUser.getId(),
+			defaultCurrentUser.getId(),
 			request.productId(),
 			request.receiverName(),
 			request.receiverAddress(),

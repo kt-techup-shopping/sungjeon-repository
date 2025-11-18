@@ -13,7 +13,6 @@ public class ErrorResponse {
 	private String message;
 
 	public static ResponseEntity<ErrorData> error(HttpStatus status, String message) {
-		// return new ErrorResponse(status, message);
 		return ResponseEntity.status(status).body(ErrorData.of(status.series().name(), message));
 	}
 

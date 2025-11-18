@@ -2,6 +2,7 @@ package com.kt.controller.user;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,13 +17,16 @@ import com.kt.common.Paging;
 import com.kt.common.SwaggerAssistance;
 import com.kt.dto.user.UserResponse;
 import com.kt.dto.user.UserUpdateRequest;
+import com.kt.security.CurrentUser;
 import com.kt.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "User")
 @RestController
 @RequestMapping("/admin/users")
 @RequiredArgsConstructor
@@ -42,18 +46,18 @@ public class AdminUserController extends SwaggerAssistance {
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResult<Page<UserResponse.Search>> search(
+		@AuthenticationPrincipal CurrentUser currentUser,
 		@RequestParam(required = false) String keyword,
 		@Parameter(hidden = true) Paging paging
 	) {
-
+		System.out.println(currentUser.getId());
 		// pageable -> interface -> 구현체 : PageRequest
 		// 인터페이스가 존재하면 반드시 구현체(클래스)가 있다고 약속이 되어있다.
-
 		var search = userService.search(paging.toPageable(), keyword)
 			.map(user -> new UserResponse.Search(
 				user.getId(),
 				user.getName(),
-				user.getEmail()
+				user.getCreatedAt()
 			));
 
 		return ApiResult.ok(search);
@@ -65,6 +69,7 @@ public class AdminUserController extends SwaggerAssistance {
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResult<UserResponse.Detail> detail(@PathVariable Long id) {
 		var user = userService.detail(id);
+
 		return ApiResult.ok(new UserResponse.Detail(
 			user.getId(),
 			user.getName(),

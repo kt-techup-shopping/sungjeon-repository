@@ -15,7 +15,8 @@ public class ProductService {
 	private final ProductRepository productRepository;
 
 	public void create(String name, Long price, Long quantity) {
-		productRepository.save(new Product(
+		productRepository.save(
+			new Product(
 				name,
 				price,
 				quantity
@@ -53,4 +54,15 @@ public class ProductService {
 		product.delete();
 	}
 
+	public void decreaseStock(Long id, Long quantity) {
+		var product = productRepository.findByIdOrThrow(id);
+
+		product.decreaseStock(quantity);
+	}
+
+	public void increaseStock(Long id, Long quantity) {
+		var product = productRepository.findByIdOrThrow(id);
+
+		product.increaseStock(quantity);
+	}
 }

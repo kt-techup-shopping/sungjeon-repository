@@ -8,16 +8,15 @@ public interface OrderRequest {
 	record Create(
 		@NotNull
 		Long productId,
+		@NotNull
+		@Min(1)
+		Long quantity,
 		@NotBlank
 		String receiverName,
 		@NotBlank
 		String receiverAddress,
 		@NotBlank
-		String receiverMobile,
-		@NotNull
-		@Min(1)
-		Long quantity
-
+		String receiverMobile
 	) {
 	}
 }
