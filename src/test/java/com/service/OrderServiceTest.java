@@ -1,4 +1,4 @@
-package com.kt.service;
+package com.service;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -22,7 +22,6 @@ import com.repository.order.OrderRepository;
 import com.repository.orderproduct.OrderProductRepository;
 import com.repository.product.ProductRepository;
 import com.repository.user.UserRepository;
-import com.service.OrderService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderServiceTest {

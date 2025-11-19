@@ -1,4 +1,4 @@
-package com.kt.repository.product;
+package com.repository.product;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.domain.product.Product;
-import com.repository.product.ProductRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

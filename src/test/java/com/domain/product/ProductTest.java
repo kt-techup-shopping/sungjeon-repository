@@ -1,4 +1,4 @@
-package com.kt.domain.product;
+package com.domain.product;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-
-import com.domain.product.Product;
 
 class ProductTest {
 	// 객체 생성이 잘됨?

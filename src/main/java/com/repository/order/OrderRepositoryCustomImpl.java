@@ -6,11 +6,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.domain.order.QOrder;
+import com.domain.orderproduct.QOrderProduct;
+import com.domain.product.QProduct;
 import com.dto.order.OrderResponse;
-import com.kt.domain.order.QOrder;
-import com.kt.domain.orderproduct.QOrderProduct;
-import com.kt.domain.product.QProduct;
-import com.kt.dto.order.QOrderResponse_Search;
+import com.dto.order.QOrderResponse_Search;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
