@@ -14,14 +14,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.kt.domain.product.Product;
-import com.kt.domain.user.Gender;
-import com.kt.domain.user.Role;
-import com.kt.domain.user.User;
-import com.kt.repository.order.OrderRepository;
-import com.kt.repository.orderproduct.OrderProductRepository;
-import com.kt.repository.product.ProductRepository;
-import com.kt.repository.user.UserRepository;
+import com.domain.product.Product;
+import com.domain.user.Gender;
+import com.domain.user.Role;
+import com.domain.user.User;
+import com.repository.order.OrderRepository;
+import com.repository.orderproduct.OrderProductRepository;
+import com.repository.product.ProductRepository;
+import com.repository.user.UserRepository;
+import com.service.OrderService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderServiceTest {

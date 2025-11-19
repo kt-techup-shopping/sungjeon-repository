@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import com.domain.product.Product;
+
 class ProductTest {
 	// 객체 생성이 잘됨?
 	// 제목을 작성하는 2가지 방법
