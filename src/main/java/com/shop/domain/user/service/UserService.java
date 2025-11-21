@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.domain.user.model.User;
+import com.shop.domain.user.repository.UserRepository;
+import com.shop.domain.user.request.UserRequest;
 import com.shop.global.common.ErrorCode;
 import com.shop.global.common.Preconditions;
-import com.shop.domain.user.request.UserRequest;
-import com.shop.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,18 +33,18 @@ public class UserService {
 	// 환경설정을 살짝 바꿔서 일관된 서비스를 제공하는 것
 	public void create(UserRequest.Create request) {
 		var newUser = User.normalUser(
-				request.loginId(),
+			request.loginId(),
 			passwordEncoder.encode(request.password()),
-				request.name(),
-				request.email(),
-				request.mobile(),
-				request.gender(),
-				request.birthday(),
-				LocalDateTime.now(),
-				LocalDateTime.now()
-			);
+			request.name(),
+			request.email(),
+			request.mobile(),
+			request.gender(),
+			request.birthday(),
+			LocalDateTime.now(),
+			LocalDateTime.now()
+		);
 
-			userRepository.save(newUser);
+		userRepository.save(newUser);
 	}
 
 	public boolean isDuplicateLoginId(String loginId) {
