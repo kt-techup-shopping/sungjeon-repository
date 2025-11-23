@@ -25,5 +25,90 @@
  */
 package com.shop.domain.cart.controller;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.shop.domain.cart.response.CartResponse;
+import com.shop.domain.cart.service.CartService;
+import com.shop.domain.cartitem.request.CartItemRequest;
+import com.shop.domain.cartitem.response.CartItemResponse;
+import com.shop.global.security.UserPrincipal;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/cart")
+@RequiredArgsConstructor
 public class CartController {
+
+	private final CartService cartService;
+
+	@GetMapping
+	public ResponseEntity<CartResponse.Detail> getCart(
+		@AuthenticationPrincipal UserPrincipal userPrincipal) {
+		CartResponse.Detail cart = cartService.getCart(userPrincipal.getId());
+		return ResponseEntity.ok(cart);
+	}
+
+	@GetMapping("/items")
+	public ResponseEntity<List<CartItemResponse.Detail>> getCartItems(
+		@AuthenticationPrincipal UserPrincipal userPrincipal) {
+		List<CartItemResponse.Detail> items = cartService.getCartItems(userPrincipal.getId());
+		return ResponseEntity.ok(items);
+	}
+
+	@GetMapping("/items/search")
+	public ResponseEntity<Page<CartItemResponse.Detail>> searchCartItems(
+		@AuthenticationPrincipal UserPrincipal userPrincipal,
+		@RequestParam(required = false) String keyword,
+		Pageable pageable) {
+		Page<CartItemResponse.Detail> result = cartService.searchCartItems(
+			userPrincipal.getId(), keyword, pageable);
+		return ResponseEntity.ok(result);
+	}
+
+	@PostMapping("/items")
+	public ResponseEntity<Long> addCartItem(
+		@AuthenticationPrincipal UserPrincipal userPrincipal,
+		@Valid @RequestBody CartItemRequest.Create request) {
+		Long cartItemId = cartService.addCartItem(userPrincipal.getId(), request);
+		return ResponseEntity.ok(cartItemId);
+	}
+
+	@PutMapping("/items/{itemId}")
+	public ResponseEntity<Void> updateCartItem(
+		@AuthenticationPrincipal UserPrincipal userPrincipal,
+		@PathVariable Long itemId,
+		@Valid @RequestBody CartItemRequest.Update request) {
+		cartService.updateCartItem(userPrincipal.getId(), itemId, request);
+		return ResponseEntity.ok().build();
+	}
+
+	@PutMapping("/items/delete")
+	public ResponseEntity<Void> deleteCartItems(
+		@AuthenticationPrincipal UserPrincipal userPrincipal,
+		@Valid @RequestBody CartItemRequest.DeleteItems request) {
+		cartService.deleteCartItems(userPrincipal.getId(), request);
+		return ResponseEntity.ok().build();
+	}
+
+	@PutMapping("/clear")
+	public ResponseEntity<Void> clearCart(
+		@AuthenticationPrincipal UserPrincipal userPrincipal) {
+		cartService.clearCart(userPrincipal.getId());
+		return ResponseEntity.ok().build();
+	}
 }
