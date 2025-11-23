@@ -1,20 +1,46 @@
 package com.shop.domain.cartitem.response;
 
-import java.time.LocalDateTime;
+import com.shop.domain.cartitem.model.CartItem;
 
-import com.querydsl.core.annotations.QueryProjection;
+public class CartItemResponse {
 
-public interface CartItemResponse {
-	record Search(
-		Long id,
+	public record Detail(
+		Long cartItemId,
+		Long productId,
 		String productName,
-		Long productCount,
 		Long productPrice,
+		Long discountPrice,
+		Long quantity,
 		Long totalPrice,
-		LocalDateTime createdAt
+		Long totalDiscountPrice,
+		boolean isAvailable,
+		boolean isSoldOut
 	) {
-		@QueryProjection
-		public Search {
+
+		// status를 메서드로 제공 (파생 정보)
+		public String status() {
+			if (!isAvailable) {
+				return "판매중지";
+			}
+			if (isSoldOut) {
+				return "품절";
+			}
+			return "정상";
+		}
+
+		public static Detail of(CartItem cartItem) {
+			return new Detail(
+				cartItem.getId(),
+				cartItem.getProduct().getId(),
+				cartItem.getProduct().getName(),
+				cartItem.getProduct().getPrice(),
+				cartItem.getProduct().getDiscountPrice(),
+				cartItem.getQuantity(),
+				cartItem.getTotalPrice(),
+				cartItem.getTotalDiscountPrice(),
+				cartItem.isAvailable(),
+				cartItem.isSoldOut()
+			);
 		}
 	}
 }

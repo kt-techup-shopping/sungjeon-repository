@@ -61,6 +61,7 @@ public class Product extends BaseEntity {
 	private String name;
 	private Long price;
 	private Long stock;
+	private Long discountPrice;
 	@Enumerated(EnumType.STRING)
 	private ProductStatus status = ProductStatus.ACTIVATED;
 
@@ -130,5 +131,9 @@ public class Product extends BaseEntity {
 	public boolean isSoldOut() {
 		if (this.stock == 0)
 			return this.status == ProductStatus.SOLD_OUT;
+	}
+
+	public void getDiscountPrice(Long discountPrice) {
+		this.price = discountPrice;
 	}
 }

@@ -58,12 +58,16 @@ public class Cart extends BaseEntity {
 	public int getTotalItemCount() {
 		return cartItems.stream()
 			.filter(CartItem::isAvailable)
-			.mapToInt(item -> item.getProductCount().intValue())
+			.mapToInt(item -> item.getQuantity().intValue())
 			.sum();
 	}
 
 	// 카트 정리
 	public void clearCartItems() {
 		cartItems.clear();
+	}
+
+	public void removeInactiveProducts() {
+		cartItems.removeIf(item -> !item.getProduct().isActive());
 	}
 }

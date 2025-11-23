@@ -5,24 +5,23 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.shop.domain.cart.model.Cart;
 import com.shop.domain.cartitem.model.CartItem;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Long>, CartItemRepositoryCustom {
 
-	// 1. 기본 정보만 (가장 빠름)
-	Optional<Cart> findByUserId(Long userId);
+	@EntityGraph(attributePaths = "product")
+	Optional<CartItem> findWithProductByCartUserIdAndProductId(Long userId, Long productId);
 
-	// 2. 상품 개수만 필요할 때
-	@EntityGraph(attributePaths = "cartItems")
-	Optional<Cart> findWithCartItemsByUserId(Long userId);
+	@EntityGraph(attributePaths = "product")
+	Optional<CartItem> findWithProductByCartUserIdAndId(Long userId, Long cartItemId);
 
-	// 3. 상품 정보도 필요할 때
-	@EntityGraph(attributePaths = {"cartItems", "cartItems.product"})
-	Optional<Cart> findWithCartItemsAndProductsByUserId(Long userId);
+	Optional<CartItem> findByCartUserIdAndId(Long userId, Long cartItemId);
 
-	// 4. 모든 정보가 필요할 때
-	@EntityGraph(attributePaths = {"user", "cartItems", "cartItems.product"})
-	Optional<Cart> findWithAllByUserId(Long userId);
-}
+	void deleteByCartUserIdAndIdIn(Long userId, java.util.List<Long> cartItemIds);
+
+	void deleteAllByCartUserId(Long userId);
+
+	void deleteByProductId(Long productId);
+
+	Long countByCartUserId(Long userId);
 }
