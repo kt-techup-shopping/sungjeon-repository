@@ -17,8 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartItem extends BaseEntity {
 	private Long quantity;
-	private Long intCoupon; // TODO.. 쿠폰할인
-	private Long percentCoupon;
 
 	@ManyToOne
 	@JoinColumn(name = "cart_id")
@@ -54,7 +52,7 @@ public class CartItem extends BaseEntity {
 	}
 
 	public Long getTotalDiscountPrice() {
-		return this.quantity * this.product.getPrice() * percentCoupon - intCoupon;
+		return this.quantity * this.product.getPrice(); // * percentCoupon - intCoupon;
 		// return this.quantity * this.product.getDiscountPrice();
 	} // TODO.. 할인정책 결정 필요, 현재는 퍼센트 할인 후 정수 할인
 

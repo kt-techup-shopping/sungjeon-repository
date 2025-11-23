@@ -129,8 +129,7 @@ public class Product extends BaseEntity {
 	}
 
 	public boolean isSoldOut() {
-		if (this.stock == 0)
-			return this.status == ProductStatus.SOLD_OUT;
+		return stock == 0 && this.status == ProductStatus.SOLD_OUT;
 	}
 
 	public void getDiscountPrice(Long discountPrice) {

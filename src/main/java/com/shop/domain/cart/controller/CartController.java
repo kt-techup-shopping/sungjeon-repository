@@ -19,9 +19,12 @@ import com.shop.domain.cartitem.response.CartItemResponse;
 import com.shop.global.common.ApiResult;
 import com.shop.global.security.CurrentUser;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "장바구니", description = "장바구니 API")
 @RestController
 @RequestMapping("/cart")
 @RequiredArgsConstructor
@@ -29,7 +32,7 @@ public class CartController {
 
 	private final CartService cartService;
 
-	// 내 장바구니 조회
+	@Operation(summary = "장바구니 조회")
 	@GetMapping
 	public ApiResult<CartResponse.Detail> getCart(
 		@AuthenticationPrincipal CurrentUser currentUser) {
@@ -37,7 +40,7 @@ public class CartController {
 		return ApiResult.ok(cart);
 	}
 
-	// 장바구니 검색
+	@Operation(summary = "장바구니 검색")
 	@GetMapping("/search")
 	public ApiResult<Page<CartItemResponse.Detail>> searchCartItems(
 		@AuthenticationPrincipal CurrentUser currentUser,
@@ -48,7 +51,7 @@ public class CartController {
 		return ApiResult.ok(result);
 	}
 
-	// 장바구니 추가
+	@Operation(summary = "장바구니 상품 추가")
 	@PostMapping("/items")
 	public ApiResult<Long> addCartItem(
 		@AuthenticationPrincipal CurrentUser currentUser,
@@ -57,7 +60,7 @@ public class CartController {
 		return ApiResult.ok(cartItemId);
 	}
 
-	// 수량 변경
+	@Operation(summary = "상품 수량 변경")
 	@PutMapping("/items/{itemId}")
 	public ApiResult<Void> updateCartItem(
 		@AuthenticationPrincipal CurrentUser currentUser,
@@ -67,7 +70,7 @@ public class CartController {
 		return ApiResult.ok();
 	}
 
-	// 특정 아이템 삭제
+	@Operation(summary = "특정 상품 삭제")
 	@PutMapping("/items/{itemId}/delete")
 	public ApiResult<Void> deleteCartItem(
 		@AuthenticationPrincipal CurrentUser currentUser,
@@ -76,7 +79,7 @@ public class CartController {
 		return ApiResult.ok();
 	}
 
-	// 일괄 삭제
+	@Operation(summary = "선택 상품 일괄 삭제")
 	@PutMapping("/items")
 	public ApiResult<Void> deleteCartItems(
 		@AuthenticationPrincipal CurrentUser currentUser,
@@ -85,7 +88,7 @@ public class CartController {
 		return ApiResult.ok();
 	}
 
-	// P전체 비우기
+	@Operation(summary = "장바구니 비우기")
 	@PutMapping
 	public ApiResult<Void> clearCart(
 		@AuthenticationPrincipal CurrentUser currentUser) {
