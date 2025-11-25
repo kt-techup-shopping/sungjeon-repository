@@ -15,7 +15,7 @@ import com.shop.domain.cart.response.CartResponse;
 import com.shop.domain.cart.service.CartService;
 import com.shop.domain.cartitem.request.CartItemRequest;
 import com.shop.domain.cartitem.response.CartItemResponse;
-import com.shop.global.common.ApiResult;
+import com.shop.global.common.response.ApiResult;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,20 +34,20 @@ public class CartTestController {
 	// 내 장바구니 조회
 	@Operation(summary = "장바구니 조회", description = "특정 사용자의 장바구니를 조회합니다.")
 	@GetMapping("/{userId}")
-	public ApiResult<CartResponse.Detail> getCart(
+	public ApiResult<CartResponse> getCart(
 		@Parameter(description = "사용자 ID") @PathVariable Long userId) {
-		CartResponse.Detail cart = cartService.getCart(userId);
+		CartResponse cart = cartService.getCart(userId);
 		return ApiResult.ok(cart);
 	}
 
 	// 장바구니 검색
 	@Operation(summary = "장바구니 검색", description = "장바구니 내 상품을 검색합니다.")
 	@GetMapping("/{userId}/search")
-	public ApiResult<Page<CartItemResponse.Detail>> searchCartItems(
+	public ApiResult<Page<CartItemResponse>> searchCartItems(
 		@Parameter(description = "사용자 ID") @PathVariable Long userId,
 		@RequestParam(required = false) String keyword,
 		Pageable pageable) {
-		Page<CartItemResponse.Detail> result = cartService.searchCartItems(userId, keyword, pageable);
+		Page<CartItemResponse> result = cartService.searchCartItems(userId, keyword, pageable);
 		return ApiResult.ok(result);
 	}
 

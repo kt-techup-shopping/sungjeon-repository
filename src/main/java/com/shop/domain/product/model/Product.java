@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.logging.log4j.util.Strings;
 
 import com.shop.domain.orderproduct.model.OrderProduct;
-import com.shop.global.common.BaseEntity;
-import com.shop.global.common.ErrorCode;
-import com.shop.global.common.Preconditions;
+import com.shop.global.common.exception.ErrorCode;
+import com.shop.global.common.support.BaseEntity;
+import com.shop.global.common.support.Preconditions;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

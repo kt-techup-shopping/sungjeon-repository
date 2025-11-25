@@ -29,10 +29,10 @@ public class SecurityConfiguration {
 	// 평문은 5번 해싱해서 랜덤한 값을 저장함 -> 비교할때는 5번해싱해서 같은지를 비교
 	private final JwtFilter jwtFilter;
 
-	private static final String[] GET_PERMIT_ALL = {"/api/health/**", "/swagger-ui/**", "/v3/api-docs/**", "/cart/**",
+	private static final String[] GET_PERMIT_ALL = {"/api/health/**", "/swagger-ui/**", "/v3/api-docs/**",
 		"/products/**"};
-	private static final String[] POST_PERMIT_ALL = {"/users", "/auth/login", "/cart/**", "/products/**"};
-	private static final String[] PUT_PERMIT_ALL = {"/api/v1/public/**", "/cart/**", "/products/**"};
+	private static final String[] POST_PERMIT_ALL = {"/users", "/auth/login", "/products/**"};
+	private static final String[] PUT_PERMIT_ALL = {"/api/v1/public/**", "/products/**"};
 	private static final String[] PATCH_PERMIT_ALL = {"/api/v1/public/**"};
 	private static final String[] DELETE_PERMIT_ALL = {"/api/v1/public/**"};
 

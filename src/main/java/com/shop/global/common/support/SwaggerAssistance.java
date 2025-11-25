@@ -1,4 +1,4 @@
-package com.shop.global.common;
+package com.shop.global.common.support;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

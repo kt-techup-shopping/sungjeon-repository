@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.shop.domain.cartitem.model.CartItem;
 import com.shop.domain.user.model.User;
-import com.shop.global.common.BaseEntity;
+import com.shop.global.common.support.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

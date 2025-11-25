@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 
-import com.shop.global.common.CustomException;
-import com.shop.global.common.ErrorCode;
 import com.shop.domain.product.model.Product;
+import com.shop.global.common.exception.CustomException;
+import com.shop.global.common.exception.ErrorCode;
 
 import jakarta.persistence.LockModeType;
 

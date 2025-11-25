@@ -1,4 +1,4 @@
-package com.shop.global.aspect;
+package com.shop.global.aspect.lock;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 

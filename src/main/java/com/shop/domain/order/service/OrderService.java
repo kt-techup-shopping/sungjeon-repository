@@ -1,20 +1,20 @@
 package com.shop.domain.order.service;
 
-import org.redisson.api.RedissonClient;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.domain.order.model.Order;
 import com.shop.domain.order.model.Receiver;
-import com.shop.global.common.ErrorCode;
-import com.shop.global.common.Lock;
-import com.shop.global.common.Preconditions;
-import com.shop.domain.orderproduct.model.OrderProduct;
 import com.shop.domain.order.repository.OrderRepository;
+import com.shop.domain.orderproduct.model.OrderProduct;
 import com.shop.domain.orderproduct.repository.OrderProductRepository;
 import com.shop.domain.product.repository.ProductRepository;
 import com.shop.domain.user.repository.UserRepository;
+import com.shop.global.common.exception.ErrorCode;
+import com.shop.global.common.support.Lock;
+import com.shop.global.common.support.Preconditions;
+import com.shop.global.integration.slack.SlackApi;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,12 +22,12 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class OrderService {
-	private final RedisProperties redisProperties;
 	private final UserRepository userRepository;
 	private final ProductRepository productRepository;
 	private final OrderRepository orderRepository;
 	private final OrderProductRepository orderProductRepository;
-	private final RedissonClient redissonClient;
+	private final ApplicationEventPublisher applicationEventPublisher;
+	private final SlackApi slackApi;
 
 	// reference , primitive
 	// 선택하는 기준 1번째 : null 가능?
@@ -66,5 +66,13 @@ public class OrderService {
 
 		product.mapToOrderProduct(orderProduct);
 		order.mapToOrderProduct(orderProduct);
+
+		// 슬랙에다가 궁금하니까 누가 얼마 주문했나 알림 받고싶음
+		// 저수준 모듈이 고수준 모듈을 의존하는(아는) 문제 발생
+		// applicationEventPublisher.publishEvent(
+		// 	new Message("User: " + user.getName() + " ordered :" + quantity * product.getPrice())
+		// );
+		slackApi.notify("User: " + user.getName() + " ordered :" + quantity * product.getPrice());
+
 	}
 }

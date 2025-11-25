@@ -2,9 +2,9 @@ package com.shop.domain.cartitem.model;
 
 import com.shop.domain.cart.model.Cart;
 import com.shop.domain.product.model.Product;
-import com.shop.global.common.BaseEntity;
-import com.shop.global.common.ErrorCode;
-import com.shop.global.common.Preconditions;
+import com.shop.global.common.exception.ErrorCode;
+import com.shop.global.common.support.BaseEntity;
+import com.shop.global.common.support.Preconditions;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

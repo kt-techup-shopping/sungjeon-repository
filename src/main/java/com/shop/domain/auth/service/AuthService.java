@@ -5,10 +5,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shop.global.common.CustomException;
-import com.shop.global.common.ErrorCode;
-import com.shop.global.common.Preconditions;
 import com.shop.domain.user.repository.UserRepository;
+import com.shop.global.common.exception.CustomException;
+import com.shop.global.common.exception.ErrorCode;
+import com.shop.global.common.support.Preconditions;
 import com.shop.global.security.JwtService;
 
 import lombok.RequiredArgsConstructor;

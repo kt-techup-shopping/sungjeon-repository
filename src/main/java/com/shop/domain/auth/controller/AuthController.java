@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.domain.auth.service.AuthService;
-import com.shop.global.common.ApiResult;
 import com.shop.domain.auth.request.LoginRequest;
 import com.shop.domain.auth.response.LoginResponse;
+import com.shop.domain.auth.service.AuthService;
+import com.shop.global.common.response.ApiResult;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

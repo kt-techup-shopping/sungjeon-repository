@@ -16,9 +16,9 @@ import com.shop.domain.product.model.Product;
 import com.shop.domain.product.repository.ProductRepository;
 import com.shop.domain.user.model.User;
 import com.shop.domain.user.repository.UserRepository;
-import com.shop.global.common.CustomException;
-import com.shop.global.common.ErrorCode;
-import com.shop.global.common.Preconditions;
+import com.shop.global.common.exception.CustomException;
+import com.shop.global.common.exception.ErrorCode;
+import com.shop.global.common.support.Preconditions;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,16 +31,16 @@ public class CartService {
 	private final ProductRepository productRepository;
 	private final UserRepository userRepository;
 
-	public CartResponse.Detail getCart(Long userId) {
+	public CartResponse getCart(Long userId) {
 		return cartRepository.findWithCartItemsAndProductsByUserId(userId)
 			.map(cart -> {
 				cart.removeInactiveProducts();
-				return CartResponse.Detail.from(cart);
+				return CartResponse.from(cart); // 장바구니에 물건이 있을 때의 응답
 			})
-			.orElse(CartResponse.Detail.empty(userId));
+			.orElse(CartResponse.empty(userId)); // 장바구니가 비어있을 때의 응답
 	}
 
-	public Page<CartItemResponse.Detail> searchCartItems(Long userId, String keyword, Pageable pageable) {
+	public Page<CartItemResponse> searchCartItems(Long userId, String keyword, Pageable pageable) {
 		return cartItemRepository.search(userId, keyword, pageable);
 	}
 
@@ -71,8 +71,13 @@ public class CartService {
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
 		Product product = cartItem.getProduct();
+
+		// 상품의 상태 확인, 활성이 아닐시 오류 발생
 		Preconditions.validate(product.isActive(), ErrorCode.NOT_ACTIVE);
+		// 상품의 재고가 담으려는 재고보다 적을 경우 오류 발생
 		Preconditions.validate(product.getStock() >= request.getQuantity(), ErrorCode.NOT_ENOUGH_STOCK);
+		// 상품의 수량 변경이 1보다 적을때 오류 발생
+		Preconditions.validate(request.getQuantity() >= 1, ErrorCode.MIN_PIECE);
 
 		cartItem.updateQuantity(request.getQuantity());
 	}

@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shop.global.common.BaseEntity;
 import com.shop.domain.orderproduct.model.OrderProduct;
 import com.shop.domain.user.model.User;
+import com.shop.global.common.support.BaseEntity;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

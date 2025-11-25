@@ -2,14 +2,15 @@ package com.shop.domain.user.repository;
 
 import java.util.Optional;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.shop.global.common.CustomException;
-import com.shop.global.common.ErrorCode;
 import com.shop.domain.user.model.User;
+import com.shop.global.common.exception.CustomException;
+import com.shop.global.common.exception.ErrorCode;
 
 // <T, ID>
 // T: Entity 클래스 => User
@@ -27,13 +28,24 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByLoginId(String loginId);
 
 	@Query("""
-	SELECT exists (SELECT u FROM User u WHERE u.loginId = ?1)
-""")
+			SELECT exists (SELECT u FROM User u WHERE u.loginId = ?1)
+		""")
 	Boolean existsByLoginIdJPQL(String loginId);
 
 	Page<User> findAllByNameContaining(String name, Pageable pageable);
 
+	@Query(value = """
+			SELECT DISTINCT u FROM User u
+			LEFT JOIN FETCH u.orders o
+			WHERE u.id = :id
+		""")
+	@NotNull Optional<User> findById(@NotNull Long id);
+
+	// @EntityGraph(attributePaths = "orders")
+	// @NotNull Optional<User> findById(@NotNull Long id);
+
 	default User findByIdOrThrow(Long id, ErrorCode errorCode) {
 		return findById(id).orElseThrow(() -> new CustomException(errorCode));
+
 	}
 }

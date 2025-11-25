@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.domain.order.service.OrderService;
-import com.shop.global.common.ApiResult;
 import com.shop.domain.order.request.OrderRequest;
+import com.shop.domain.order.service.OrderService;
+import com.shop.global.common.response.ApiResult;
 import com.shop.global.security.DefaultCurrentUser;
 
 import jakarta.validation.Valid;

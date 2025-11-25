@@ -1,8 +1,8 @@
 package com.shop.domain.orderproduct.model;
 
-import com.shop.global.common.BaseEntity;
 import com.shop.domain.order.model.Order;
 import com.shop.domain.product.model.Product;
+import com.shop.global.common.support.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

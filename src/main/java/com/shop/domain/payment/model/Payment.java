@@ -1,7 +1,7 @@
 package com.shop.domain.payment.model;
 
-import com.shop.global.common.BaseEntity;
 import com.shop.domain.order.model.Order;
+import com.shop.global.common.support.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

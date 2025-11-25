@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.domain.user.service.UserService;
-import com.shop.global.common.ApiResult;
-import com.shop.global.common.Paging;
-import com.shop.global.common.SwaggerAssistance;
-import com.shop.domain.user.response.UserResponse;
 import com.shop.domain.user.request.UserUpdateRequest;
+import com.shop.domain.user.response.UserResponse;
+import com.shop.domain.user.service.UserService;
+import com.shop.global.common.request.Paging;
+import com.shop.global.common.response.ApiResult;
+import com.shop.global.common.support.SwaggerAssistance;
 import com.shop.global.security.CurrentUser;
 
 import io.swagger.v3.oas.annotations.Operation;

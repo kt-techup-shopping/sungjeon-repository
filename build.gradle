@@ -35,6 +35,8 @@ dependencies {
     implementation 'org.redisson:redisson-spring-boot-starter:3.32.0'
 
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    
+    implementation 'com.slack.api:slack-api-client:1.43.1'
 
     implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'

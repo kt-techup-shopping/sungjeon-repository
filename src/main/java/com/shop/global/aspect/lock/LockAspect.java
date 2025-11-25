@@ -1,4 +1,4 @@
-package com.shop.global.aspect;
+package com.shop.global.aspect.lock;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -6,9 +6,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
-import com.shop.global.common.CustomException;
-import com.shop.global.common.ErrorCode;
-import com.shop.global.common.Lock;
+import com.shop.global.common.exception.CustomException;
+import com.shop.global.common.exception.ErrorCode;
+import com.shop.global.common.support.Lock;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ public class LockAspect {
 	private final AopTransactionManager aopTransactionManager;
 	private final RedissonClient redissonClient;
 
-	@Around("@annotation(com.shop.global.common.Lock) && @annotation(lock)")
+	@Around("@annotation(com.shop.global.common.support.Lock) && @annotation(lock)")
 	public Object lock(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {
 		var arguments = joinPoint.getArgs();
 		var identity = (Long)arguments[lock.index()];

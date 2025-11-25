@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.global.common.ApiResult;
-import com.shop.global.common.Paging;
-import com.shop.domain.order.response.OrderResponse;
 import com.shop.domain.order.repository.OrderRepositoryCustom;
+import com.shop.domain.order.response.OrderResponse;
+import com.shop.global.common.request.Paging;
+import com.shop.global.common.response.ApiResult;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
