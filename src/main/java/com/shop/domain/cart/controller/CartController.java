@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shop.domain.cart.response.CartResponse;
 import com.shop.domain.cart.service.CartService;
-import com.shop.domain.cartitem.request.CartItemRequest;
 import com.shop.domain.cartitem.response.CartItemResponse;
 import com.shop.global.common.request.Paging;
 import com.shop.global.common.response.ApiResult;
@@ -24,6 +23,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 
 @Tag(name = "장바구니", description = "장바구니 API")
@@ -49,7 +50,7 @@ public class CartController {
 	@GetMapping("/search")
 	public ApiResult<Page<CartItemResponse>> searchCartItems(
 		@AuthenticationPrincipal CurrentUser currentUser,
-		@RequestParam(required = false) String keyword,
+		@RequestParam(required = false) @NotBlank String keyword,
 		@Parameter(hidden = true) Paging paging
 	) {
 		Page<CartItemResponse> result = cartService.searchCartItems(
@@ -62,7 +63,7 @@ public class CartController {
 	@PostMapping("/items")
 	public ApiResult<Long> addCartItem(
 		@AuthenticationPrincipal CurrentUser currentUser,
-		@Valid @RequestBody CartItemRequest.Create request) {
+		@Valid @RequestBody CartItemCreate request) {
 		Long cartItemId = cartService.addCartItem(currentUser.getId(), request.getProductId(), request);
 		return ApiResult.ok(cartItemId);
 	} // ex : POST http://localhost:8080/cart/items {"productId" : 1, "quantity" : 2}
@@ -72,8 +73,8 @@ public class CartController {
 	@PutMapping("/items/{itemId}")
 	public ApiResult<Void> updateCartItem(
 		@AuthenticationPrincipal CurrentUser currentUser,
-		@PathVariable Long itemId,
-		@Valid @RequestBody CartItemRequest.Update request) {
+		@PathVariable @Min(1) Long itemId,
+		@Valid @RequestBody CartItemUpdate request) {
 		cartService.updateCartItem(currentUser.getId(), itemId, request);
 		return ApiResult.ok();
 	} // ex : PUT http://localhost:8080/cart/items/1 /{"quantity" : 3}
@@ -83,7 +84,7 @@ public class CartController {
 	@PutMapping("/items/{itemId}/delete")
 	public ApiResult<Void> deleteCartItem(
 		@AuthenticationPrincipal CurrentUser currentUser,
-		@PathVariable Long itemId) {
+		@PathVariable @Min(1) Long itemId) {
 		cartService.deleteCartItem(currentUser.getId(), itemId);
 		return ApiResult.ok();
 	} // ex : PUT http://localhost:8080/cart/3/delete
@@ -93,7 +94,7 @@ public class CartController {
 	@PutMapping("/items")
 	public ApiResult<Void> deleteCartItems(
 		@AuthenticationPrincipal CurrentUser currentUser,
-		@Valid @RequestBody CartItemRequest.Delete request) {
+		@Valid @RequestBody CartItemDelete request) {
 		cartService.deleteCartItems(currentUser.getId(), request);
 		return ApiResult.ok();
 	} // ex : PUT http://localhost:8080/cart/items {"cartItemId" : [1,2]}
