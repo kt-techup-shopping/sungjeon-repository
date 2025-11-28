@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shop.domain.cart.response.CartResponse;
 import com.shop.domain.cart.service.CartService;
+import com.shop.domain.cartitem.request.CartItemCreate;
+import com.shop.domain.cartitem.request.CartItemDelete;
+import com.shop.domain.cartitem.request.CartItemUpdate;
 import com.shop.domain.cartitem.response.CartItemResponse;
 import com.shop.global.common.request.Paging;
 import com.shop.global.common.response.ApiResult;
