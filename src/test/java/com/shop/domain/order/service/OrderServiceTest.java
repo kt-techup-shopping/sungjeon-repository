@@ -1,4 +1,4 @@
-package com.shop.service;
+package com.shop.domain.order.service;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,17 +13,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import com.shop.domain.order.repository.OrderRepository;
-import com.shop.domain.order.service.OrderService;
-import com.shop.domain.orderproduct.repository.OrderProductRepository;
-import com.shop.domain.product.model.Product;
-import com.shop.domain.product.repository.ProductRepository;
-import com.shop.domain.user.model.Gender;
-import com.shop.domain.user.model.Role;
-import com.shop.domain.user.model.User;
-import com.shop.domain.user.repository.UserRepository;
+import com.kt.domain.product.Product;
+import com.kt.domain.user.Gender;
+import com.kt.domain.user.Role;
+import com.kt.domain.user.User;
+import com.kt.repository.order.OrderRepository;
+import com.kt.repository.orderproduct.OrderProductRepository;
+import com.kt.repository.product.ProductRepository;
+import com.kt.repository.user.UserRepository;
 
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderServiceTest {
 	@Autowired
