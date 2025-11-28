@@ -31,3 +31,6 @@ jwt:
   access-token-expiration: ${kt.jwt.access-token-expiration:300000} #5분
   refresh-token-expiration: ${kt.jwt.refresh-token-expiration:43200000} #12시간
 
+slack:
+  bot-token: ${slack.token:xoxb-9992200830017-10007636830400-ua0E0WIwyBChttBL8zp3Y2ot}
+  log-channel: ${slack.channel:C09UT912SE6}
