@@ -3,7 +3,7 @@ pluginManagement {
         id 'org.jetbrains.kotlin.jvm' version '2.2.20'
     }
 }
-rootProject.name = 'sungjeon-repository'
+rootProject.name = 'sungjeon'
 
 include 'admin'
 include 'core'
@@ -11,3 +11,4 @@ include 'user'
 include 'common'
 include 'integration'
 include 'auth'
+include 'openai'
