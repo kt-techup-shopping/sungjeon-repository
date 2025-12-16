@@ -16,6 +16,10 @@ public enum ErrorCode {
 	NOT_ENOUGH_STOCK(HttpStatus.BAD_REQUEST, "재고가 부족합니다."),
 	INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "필수값 누락입니다."),
 	FAIL_ACQUIRED_LOCK(HttpStatus.BAD_REQUEST, "락 획득에 실패했습니다."),
+
+	INVALID_CHAT(HttpStatus.BAD_REQUEST, "입력 내용이 비어있습니다."),
+	EMPTY_CHAT_HISTORY(HttpStatus.BAD_REQUEST, "대화 내역이 존재하지 않습니다."),
+
 	ERROR_SYSTEM(HttpStatus.INTERNAL_SERVER_ERROR, "시스템 오류가 발생했습니다.");
 
 	private final HttpStatus status;

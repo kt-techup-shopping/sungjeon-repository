@@ -1,0 +1,15 @@
+ext {
+    springAiVersion = "1.1.2"
+}
+
+dependencies {
+    implementation(project(":common"))
+    implementation(project(":core"))
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:$springAiVersion"
+    }
+}
