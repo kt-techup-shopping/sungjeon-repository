@@ -31,7 +31,7 @@ public class AiController {
 
 	@GetMapping("/model")
 	public String getModel() {
-		return "AI Chat Service is running with model: " + model;
+		return "AI Chat Service model: " + model;
 	}
 
 	// DB에 저장해둔 대화 내역을 요청하는 API
