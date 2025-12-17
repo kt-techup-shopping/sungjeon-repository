@@ -20,7 +20,7 @@ import com.shop.service.AiChatService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/ai")
+@RequestMapping("/ai/chat")
 @RequiredArgsConstructor
 public class AiController {
 
@@ -35,19 +35,19 @@ public class AiController {
 	}
 
 	// DB에 저장해둔 대화 내역을 요청하는 API
-	@GetMapping("/chat/history")
+	@GetMapping("/history")
 	public List<ChatMessage> getChatHistory(@RequestParam Long userId) {
 		return aiChatService.getChatHistory(userId);
 	}
 
 	// AI에게 질문을 보내는 API
-	@PostMapping("/chat")
+	@PostMapping
 	public AiChatResponse sendMessage(@RequestParam Long userId, @RequestBody AiChatRequest request) {
 		return aiChatService.sendMessage(userId, request.userInput());
 	}
 
 	// DB에 저장해둔 대화 내역을 삭제하는 API
-	@PutMapping("/chat/delete")
+	@PutMapping("/history/delete")
 	public ApiResult<Void> clearChatHistory(@RequestParam Long userId) {
 		aiChatService.clearChatHistory(userId);
 		return ApiResult.ok();
