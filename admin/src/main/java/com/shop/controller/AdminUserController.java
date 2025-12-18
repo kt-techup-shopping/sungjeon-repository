@@ -1,4 +1,4 @@
-package com.shop.api;
+package com.shop.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

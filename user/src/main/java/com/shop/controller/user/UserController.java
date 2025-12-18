@@ -1,4 +1,4 @@
-package com.shop.api.user;
+package com.shop.controller.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

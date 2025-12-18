@@ -1,4 +1,4 @@
-package com.shop.dto;
+package com.shop.response;
 
 public record LoginResponse(
 	String accessToken,
