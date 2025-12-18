@@ -1,4 +1,4 @@
-package com.shop.api.product;
+package com.shop.controller.product;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;

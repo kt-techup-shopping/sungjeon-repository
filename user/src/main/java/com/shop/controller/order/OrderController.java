@@ -1,4 +1,4 @@
-package com.shop.api.order;
+package com.shop.controller.order;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;

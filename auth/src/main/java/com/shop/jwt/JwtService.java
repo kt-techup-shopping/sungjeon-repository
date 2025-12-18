@@ -4,6 +4,9 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.shop.domain.user.Role;
+
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 
@@ -12,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtService {
 	private final JwtProperties jwtProperties;
 
-	public String issue(Long id, Date expiration) {
+	public String issue(Long id, Role role, Date expiration) {
 		// id 값은 jwt의 식별자 같은 개념 -> User의 id값
 		// claims -> jwt안에 들어갈 정보를 Map형태로 넣는데 id, 1
 
@@ -21,8 +24,9 @@ public class JwtService {
 		// refresh token -> 긴 유효기간 : 12시간 ->만료되면 로그인 다시 해야댐
 
 		return Jwts.builder()
-			.subject("kt-cloud-shopping")
-			.issuer("roy")
+			.issuer("sungjeon")
+			.subject(id.toString())
+			.claim("role", role.name())
 			.issuedAt(new Date())
 			.id(id.toString())
 			.expiration(expiration)
@@ -39,10 +43,15 @@ public class JwtService {
 	}
 
 	public boolean validate(String token) {
-		return Jwts.parser()
-			.verifyWith(jwtProperties.getSecret())
-			.build()
-			.isSigned(token);
+		try {
+			Jwts.parser()
+				.verifyWith(jwtProperties.getSecret())
+				.build()
+				.parseSignedClaims(token);
+			return true;
+		} catch (JwtException | IllegalArgumentException e) {
+			return false;
+		}
 	}
 
 	public Long parseId(String token) {
@@ -52,8 +61,19 @@ public class JwtService {
 			.build()
 			.parseSignedClaims(token)
 			.getPayload()
-			.getId();
+			.getSubject();
 
 		return Long.valueOf(id);
+	}
+
+	public Role parseRole(String token) {
+		String role = Jwts.parser()
+			.verifyWith(jwtProperties.getSecret())
+			.build()
+			.parseSignedClaims(token)
+			.getPayload()
+			.get("role", String.class);
+
+		return Role.valueOf(role);
 	}
 }
