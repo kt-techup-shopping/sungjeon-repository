@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.shop.common.exception.ErrorCode;
 import com.shop.common.support.Preconditions;
 import com.shop.config.AiConfig;
-import com.shop.dto.AiChatResponse;
-import com.shop.dto.Role;
+import com.shop.response.AiChatResponse;
+import com.shop.model.Role;
 import com.shop.model.ChatMessage;
 import com.shop.repository.ChatMessageRepository;
 

@@ -2,8 +2,6 @@ package com.shop.model;
 
 import java.time.LocalDateTime;
 
-import com.shop.dto.Role;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

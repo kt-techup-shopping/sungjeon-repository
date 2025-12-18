@@ -1,4 +1,4 @@
-package com.shop.api;
+package com.shop.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shop.common.response.ApiResult;
-import com.shop.dto.AiChatRequest;
-import com.shop.dto.AiChatResponse;
+import com.shop.request.AiChatRequest;
+import com.shop.response.AiChatResponse;
 import com.shop.model.ChatMessage;
 import com.shop.service.AiChatService;
 
