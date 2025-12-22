@@ -12,7 +12,6 @@ import com.shop.common.exception.ErrorCode;
 import com.shop.common.support.Preconditions;
 import com.shop.domain.user.User;
 import com.shop.dto.user.UserRequest;
-import com.shop.repository.order.OrderRepository;
 import com.shop.repository.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;

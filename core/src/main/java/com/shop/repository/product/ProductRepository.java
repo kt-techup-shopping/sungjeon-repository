@@ -1,5 +1,6 @@
 package com.shop.repository.product;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,9 +13,19 @@ import com.shop.domain.product.Product;
 
 import jakarta.persistence.LockModeType;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends ProductRepositoryCustom, JpaRepository<Product, Long> {
 	default Product findByIdOrThrow(Long id) {
 		return findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
+	}
+
+	default List<Product> findAllByIdOrThrow(List<Long> ids) {
+		List<Product> products = findAllById(ids);
+
+		if (products.size() != ids.size()) {
+			throw new CustomException(ErrorCode.NOT_FOUND_PRODUCT);
+		}
+
+		return products;
 	}
 
 	// select * from product where name = ?
