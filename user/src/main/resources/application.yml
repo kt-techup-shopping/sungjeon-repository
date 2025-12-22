@@ -1,4 +1,9 @@
 spring:
+  config:
+    import: classpath:integration.yml
+  application:
+    name: shopping-user-api
+
   datasource:
     url: jdbc:mysql://${db.host:localhost}:3306/${db.scheme:shopping}
     username: ${db.username:root}
@@ -34,7 +39,26 @@ jwt:
   access-token-expiration: ${kt.jwt.access-token-expiration:300000} #5분
   refresh-token-expiration: ${kt.jwt.refresh-token-expiration:43200000} #12시간
 
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      namespace: ${spring.profiles.active}
+
+  server:
+    port: 9093
+  endpoints:
+    web:
+      exposure:
+        include: "health, prometheus"
 
 slack:
   bot-token: ${slack.token:1234}
   log-channel: ${slack.channel:1234}
+
+logstash:
+  host: ${logstashhost:localhost}
+  port: ${logstashport:9601}
+
+server:
+  port: 8081

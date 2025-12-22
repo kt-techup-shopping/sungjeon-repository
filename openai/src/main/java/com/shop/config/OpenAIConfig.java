@@ -4,8 +4,11 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
-public class AiConfig {
+@RequiredArgsConstructor
+public class OpenAIConfig {
 
 	// defaultSystem에 기본값으로 줄 내용
 	public static final String DEFAULT_PROMPT =
