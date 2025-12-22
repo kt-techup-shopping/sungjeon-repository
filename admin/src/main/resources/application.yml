@@ -1,4 +1,9 @@
 spring:
+  config:
+    import: classpath:integration.yml
+  application:
+    name: shopping-admin-api
+
   datasource:
     url: jdbc:mysql://${db.host:localhost}:3306/${db.scheme:shopping}
     username: ${db.username:root}
@@ -29,6 +34,18 @@ spring:
         nodes: ${redis.host:localhost:6379}
         max-redirects: 3
 
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      namespace: ${spring.profiles.active}
+  server:
+    port: 9092
+  endpoints:
+    web:
+      exposure:
+        include: "health, prometheus"
+
 jwt:
   secret: ${kt.jwt.secret:1234567890123456789012345678901234} #32자 이상
   access-token-expiration: ${kt.jwt.access-token-expiration:300000} #5분
@@ -38,3 +55,7 @@ jwt:
 slack:
   bot-token: ${slack.token:1234}
   log-channel: ${slack.channel:1234}
+
+logstash:
+  host: ${logstashhost:localhost}
+  port: ${logstashport:9601}

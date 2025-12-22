@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.common.exception.ErrorCode;
 import com.shop.common.support.Preconditions;
-import com.shop.config.AiConfig;
-import com.shop.response.AiChatResponse;
-import com.shop.model.Role;
+import com.shop.config.OpenAIConfig;
 import com.shop.model.ChatMessage;
+import com.shop.model.Role;
 import com.shop.repository.ChatMessageRepository;
+import com.shop.response.AiChatResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +30,7 @@ public class AiChatService {
 
 		List<ChatMessage> chatHistory = chatMessageRepository.findByUserIdOrderByCreateAtAsc(userId);
 		Preconditions.validate(!chatHistory.isEmpty(), ErrorCode.EMPTY_CHAT_HISTORY);
-		
+
 		return chatHistory;
 	}
 
@@ -41,7 +41,7 @@ public class AiChatService {
 			ErrorCode.INVALID_CHAT);
 
 		// 1. 유저의 질문에 대한 AI의 응답
-		String aiResponse = chatClient.prompt().system(AiConfig.DEFAULT_PROMPT).user(userInput).call().content();
+		String aiResponse = chatClient.prompt().system(OpenAIConfig.DEFAULT_PROMPT).user(userInput).call().content();
 
 		// 2. User의 입력을 저장
 		ChatMessage userMessage = new ChatMessage(userId, Role.USER, userInput);

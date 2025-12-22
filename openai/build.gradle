@@ -5,6 +5,7 @@ ext {
 dependencies {
     implementation(project(":common"))
     implementation(project(":core"))
+    implementation(project(":integration"))
     implementation 'org.springframework.ai:spring-ai-starter-model-openai'
 }
 

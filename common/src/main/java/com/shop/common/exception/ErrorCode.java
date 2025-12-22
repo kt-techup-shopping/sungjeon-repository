@@ -58,7 +58,8 @@ public enum ErrorCode {
 	// AI
 	INVALID_CHAT(HttpStatus.BAD_REQUEST, "입력 내용이 비어있습니다."),
 	EMPTY_CHAT_HISTORY(HttpStatus.BAD_REQUEST, "대화 내역이 존재하지 않습니다."),
-
+	NOT_FOUND_VECTOR_STORE(HttpStatus.BAD_REQUEST, "존재하지 않는 벡터스토어입니다."),
+	NOT_FOUND_FAQ(HttpStatus.BAD_REQUEST, "존재하지 않는 FAQ입니다."),
 
 	;
 
