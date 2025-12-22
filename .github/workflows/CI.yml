@@ -2,7 +2,6 @@ name: pr-test
 on: pull_request
 
 env:
-  DB_PASSWORD: root
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
@@ -34,14 +33,20 @@ jobs:
         with:
           gradle-version: 8.5
 
-      - name: Run Test
+      - name: Run Admin Test
         uses: gradle/gradle-build-action@v3
         with:
           gradle-version: wrapper
-          arguments: test
+          arguments: admin:test
           # gradle test -> admin, user모두
           # 멀티모듈 user, admin 모듈이 분리
           # arguments: user:test admin:test
+      
+      - name: Run User Test
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: wrapper
+          arguments: user:test
 
       - name: send slack notification
         uses: 8398a7/action-slack@v3
