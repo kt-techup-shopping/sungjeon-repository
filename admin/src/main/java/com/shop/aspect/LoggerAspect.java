@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.shop.common.support.TechUpLogger;
 import com.shop.security.CurrentUser;
-import com.shop.service.HistoryService;
 
 import lombok.RequiredArgsConstructor;
 

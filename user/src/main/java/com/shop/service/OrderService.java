@@ -11,7 +11,6 @@ import com.shop.common.support.Preconditions;
 import com.shop.domain.order.Order;
 import com.shop.domain.order.Receiver;
 import com.shop.domain.orderproduct.OrderProduct;
-import com.shop.repository.order.OrderRepository;
 import com.shop.repository.orderproduct.OrderProductRepository;
 import com.shop.repository.product.ProductRepository;
 import com.shop.repository.user.UserRepository;

@@ -5,7 +5,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.shop.common.support.VisitorEvent;
-import com.shop.service.VisitStatService;
 
 import lombok.RequiredArgsConstructor;
 
