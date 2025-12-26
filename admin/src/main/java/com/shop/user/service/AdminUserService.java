@@ -51,4 +51,10 @@ public class AdminUserService {
 
 		return user;
 	}
+
+	public void deleteUser(Long id) {
+		var user = userRepository.findByIdOrThrow(id, ErrorCode.NOT_FOUND_USER);
+
+		user.delete();
+	}
 }
