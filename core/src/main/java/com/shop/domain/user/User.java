@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.shop.common.support.BaseEntity;
 import com.shop.domain.order.Order;
+import com.shop.support.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -35,7 +35,6 @@ public class User extends BaseEntity {
 
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders = new ArrayList<>();
-
 
 	public User(String loginId, UUID uuid, String password, String name, String email, String mobile, Gender gender,
 		LocalDate birthday, Role role, Status status) {
@@ -104,7 +103,7 @@ public class User extends BaseEntity {
 		this.role = Role.USER;
 	}
 
-	public void deactivate() {
+	public void deActivate() {
 		this.status = Status.INACTIVE;
 	}
 }

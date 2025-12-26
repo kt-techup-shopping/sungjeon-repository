@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class RefreshTokenService {
 	private final StringRedisTemplate redisTemplate;
 
-	private static final String PREFIX = "RT: ";
+	private static final String PREFIX = "RT:";
 
 	private String key(Long userId) {
 		return PREFIX + userId;
@@ -29,8 +29,7 @@ public class RefreshTokenService {
 			.opsForValue()
 			.get(key(userId));
 
-		if (stored == null)
-			return false;
+		if(stored == null) return false;
 
 		return stored.equals(refreshToken);
 	}

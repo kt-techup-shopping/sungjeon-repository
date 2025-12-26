@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.common.response.ApiResult;
-import com.shop.common.support.SwaggerAssistance;
 import com.shop.dto.product.ProductRequest;
-import com.shop.service.ProductService;
+import com.shop.response.ApiResult;
+import com.shop.support.SwaggerAssistance;
+import com.shop.vector.ProductService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

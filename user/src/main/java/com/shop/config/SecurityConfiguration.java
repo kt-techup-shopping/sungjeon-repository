@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.shop.common.encoder.PasswordEncoder;
+import com.shop.encoder.PasswordEncoder;
 import com.shop.security.JwtFilter;
 
 import lombok.RequiredArgsConstructor;

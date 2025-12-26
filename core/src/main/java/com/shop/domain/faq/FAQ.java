@@ -1,6 +1,6 @@
 package com.shop.domain.faq;
 
-import com.shop.common.support.BaseEntity;
+import com.shop.support.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

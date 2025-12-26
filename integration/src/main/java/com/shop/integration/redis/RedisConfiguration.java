@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.shop.common.profile.AppProfile;
-import com.shop.common.profile.DevProfile;
-import com.shop.common.profile.LocalProfile;
+import com.shop.profile.AppProfile;
+import com.shop.profile.DevProfile;
+import com.shop.profile.LocalProfile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +29,7 @@ public class RedisConfiguration {
 	// 5초정도 줄까?
 	// 100개의 요청을처리하는데 100*5 = 500초가 걸릴수도?
 
+	// TODO 배포 시 반영
 	@Bean
 	@DevProfile
 	@AppProfile
@@ -55,4 +56,14 @@ public class RedisConfiguration {
 			.useSingleServer().setAddress(uri);
 		return Redisson.create(config);
 	}
+
+	// @Bean
+	// public RedissonClient redissonClient() {
+	// 	var config = new Config();
+	// 	var uri = String.format("redis://%s:%s", redisProperties.getHost(), redisProperties.getPort());
+	//
+	// 	config.useSingleServer().setAddress(uri);
+	//
+	// 	return Redisson.create(config);
+	// }
 }

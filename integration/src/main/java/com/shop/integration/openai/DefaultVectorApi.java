@@ -6,12 +6,12 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 
-import com.shop.common.profile.AppProfile;
-import com.shop.common.profile.DevProfile;
-import com.shop.common.profile.LocalProfile;
-import com.shop.common.vector.VectorApi;
 import com.shop.integration.openai.request.OpenAIRequestVectorCreate;
 import com.shop.integration.openai.request.OpenAIRequestVectorUploadFile;
+import com.shop.profile.AppProfile;
+import com.shop.profile.DevProfile;
+import com.shop.profile.LocalProfile;
+import com.shop.vector.VectorApi;
 
 import lombok.RequiredArgsConstructor;
 

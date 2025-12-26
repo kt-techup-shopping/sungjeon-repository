@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shop.common.support.BaseEntity;
 import com.shop.domain.delivery.Delivery;
 import com.shop.domain.orderproduct.OrderProduct;
 import com.shop.domain.payment.Payment;
 import com.shop.domain.user.User;
+import com.shop.support.BaseEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;

@@ -4,7 +4,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import com.shop.common.support.VisitorEvent;
+import com.shop.support.VisitorEvent;
 
 import lombok.RequiredArgsConstructor;
 

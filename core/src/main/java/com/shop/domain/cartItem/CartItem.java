@@ -1,10 +1,10 @@
 package com.shop.domain.cartItem;
 
-import com.shop.common.exception.ErrorCode;
-import com.shop.common.support.BaseEntity;
-import com.shop.common.support.Preconditions;
 import com.shop.domain.cart.Cart;
 import com.shop.domain.product.Product;
+import com.shop.exception.ErrorCode;
+import com.shop.support.BaseEntity;
+import com.shop.support.Preconditions;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
