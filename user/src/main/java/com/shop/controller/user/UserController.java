@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.common.response.ApiResult;
-import com.shop.common.support.SwaggerAssistance;
 import com.shop.dto.user.UserRequest;
 import com.shop.dto.user.UserUpdatePasswordRequest;
+import com.shop.response.ApiResult;
 import com.shop.security.CurrentUser;
-import com.shop.service.UserService;
+import com.shop.support.SwaggerAssistance;
+import com.shop.vector.UserService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 
-import com.shop.common.support.Message;
+import com.shop.support.Message;
 
 import lombok.RequiredArgsConstructor;
 

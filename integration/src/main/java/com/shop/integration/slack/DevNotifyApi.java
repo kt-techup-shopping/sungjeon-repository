@@ -2,7 +2,7 @@ package com.shop.integration.slack;
 
 import org.springframework.stereotype.Component;
 
-import com.shop.common.profile.DevProfile;
+import com.shop.profile.DevProfile;
 
 @Component
 @DevProfile

@@ -1,6 +1,6 @@
 package com.shop.domain.vector;
 
-import com.shop.common.support.BaseEntity;
+import com.shop.support.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

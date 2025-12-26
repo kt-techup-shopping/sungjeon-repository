@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.shop.common.exception.CustomException;
-import com.shop.common.exception.ErrorCode;
 import com.shop.domain.delivery.Delivery;
+import com.shop.exception.CustomException;
+import com.shop.exception.ErrorCode;
 
 public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 

@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.shop.common.profile.AppProfile;
-import com.shop.common.profile.DevProfile;
-import com.shop.common.profile.LocalProfile;
+import com.shop.profile.AppProfile;
+import com.shop.profile.DevProfile;
+import com.shop.profile.LocalProfile;
 
 import lombok.RequiredArgsConstructor;
 

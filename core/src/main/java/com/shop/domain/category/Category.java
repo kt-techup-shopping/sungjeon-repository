@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.apache.logging.log4j.util.Strings;
 
-import com.shop.common.exception.ErrorCode;
-import com.shop.common.support.BaseEntity;
-import com.shop.common.support.Preconditions;
+import com.shop.exception.ErrorCode;
+import com.shop.support.BaseEntity;
+import com.shop.support.Preconditions;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

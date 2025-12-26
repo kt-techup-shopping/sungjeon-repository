@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.shop.common.exception.CustomException;
-import com.shop.common.exception.ErrorCode;
 import com.shop.domain.category.Category;
+import com.shop.exception.CustomException;
+import com.shop.exception.ErrorCode;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	List<Category> findByParentId(Long parentId);

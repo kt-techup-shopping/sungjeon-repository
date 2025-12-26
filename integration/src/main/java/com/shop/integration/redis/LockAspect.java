@@ -12,9 +12,9 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
-import com.shop.common.exception.CustomException;
-import com.shop.common.exception.ErrorCode;
-import com.shop.common.support.Lock;
+import com.shop.exception.CustomException;
+import com.shop.exception.ErrorCode;
+import com.shop.support.Lock;
 
 import lombok.RequiredArgsConstructor;
 

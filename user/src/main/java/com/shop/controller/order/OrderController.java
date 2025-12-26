@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.common.enums.HistoryType;
-import com.shop.common.response.ApiResult;
-import com.shop.common.support.TechUpLogger;
 import com.shop.dto.order.OrderRequest;
+import com.shop.enums.HistoryType;
+import com.shop.response.ApiResult;
 import com.shop.security.CurrentUser;
-import com.shop.service.OrderService;
+import com.shop.support.TechUpLogger;
+import com.shop.vector.OrderService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

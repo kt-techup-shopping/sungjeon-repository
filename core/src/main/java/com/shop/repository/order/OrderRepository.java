@@ -4,9 +4,10 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.shop.common.exception.CustomException;
-import com.shop.common.exception.ErrorCode;
 import com.shop.domain.order.Order;
+import com.shop.domain.user.User;
+import com.shop.exception.CustomException;
+import com.shop.exception.ErrorCode;
 
 public interface OrderRepository extends JpaRepository<Order, Long>, OrderRepositoryCustom {
 
@@ -16,4 +17,5 @@ public interface OrderRepository extends JpaRepository<Order, Long>, OrderReposi
 		return findById(id).orElseThrow(() -> new CustomException(errorCode));
 	}
 
+	Long user(User user);
 }

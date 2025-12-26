@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.shop.common.exception.CustomException;
-import com.shop.common.exception.ErrorCode;
 import com.shop.domain.user.User;
+import com.shop.exception.CustomException;
+import com.shop.exception.ErrorCode;
 
 public interface UserRepository extends UserRepositoryCustom, JpaRepository<User, Long> {
 	Boolean existsByLoginId(String loginId);

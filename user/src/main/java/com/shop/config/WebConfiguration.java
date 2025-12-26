@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.shop.common.interceptor.VisitStatInterceptor;
+import com.shop.interceptor.VisitStatInterceptor;
 
 import lombok.RequiredArgsConstructor;
 

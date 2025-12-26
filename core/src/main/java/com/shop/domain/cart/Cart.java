@@ -3,9 +3,9 @@ package com.shop.domain.cart;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shop.common.support.BaseEntity;
 import com.shop.domain.cartItem.CartItem;
 import com.shop.domain.user.User;
+import com.shop.support.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
