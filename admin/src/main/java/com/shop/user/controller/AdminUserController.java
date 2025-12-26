@@ -3,6 +3,7 @@ package com.shop.user.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,5 +86,16 @@ public class AdminUserController extends SwaggerAssistance {
 	) {
 		var user = userService.deActivateUser(id);
 		return ApiResult.ok(UserStatusResponse.from(user));
+	}
+
+	// 유저 삭제
+	@Operation(summary = "사용자 삭제 (관리자용)", description = "관리자가 특정 사용자를 삭제합니다.")
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public ApiResult<Void> deleteUser(
+		@PathVariable Long id
+	) {
+		userService.deleteUser(id);
+		return ApiResult.ok();
 	}
 }
