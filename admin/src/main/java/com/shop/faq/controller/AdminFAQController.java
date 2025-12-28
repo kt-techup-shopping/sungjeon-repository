@@ -1,6 +1,7 @@
 package com.shop.faq.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,15 +14,20 @@ import com.shop.faq.request.FAQRequestCreate;
 import com.shop.faq.service.FAQService;
 import com.shop.response.ApiResult;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "FAQ", description = "FAQ API")
 @RestController
-@RequestMapping("/admin/faq")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
+@RequestMapping("/admin/faq")
 public class AdminFAQController {
 	private final FAQService faqService;
 
+	@Operation(summary = "FAQ 생성", description = "FAQ를 생성합니다.")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ApiResult<Void> create(@RequestBody @Valid FAQRequestCreate request) throws Exception {
@@ -29,6 +35,7 @@ public class AdminFAQController {
 		return ApiResult.ok();
 	}
 
+	@Operation(summary = "FAQ 삭제", description = "FAQ를 삭제합니다.")
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResult<Void> delete(@PathVariable Long id) {

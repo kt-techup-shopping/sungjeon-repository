@@ -24,13 +24,15 @@ public class DefaultVectorApi implements VectorApi {
 	private final OpenAIClient openAIClient;
 	private final OpenAIProperties openAIProperties;
 
-	private final String token = "Bearer " + openAIProperties.apiKey();
+	private String getToken() {
+		return "Bearer " + openAIProperties.apiKey();
+	}
 
 	@Override
 
 	public String create(String name, String description) {
 		var response = openAIClient.create(
-			token,
+			getToken(),
 			new OpenAIRequestVectorCreate(name, description)
 		);
 		return response.id();
@@ -53,13 +55,13 @@ public class DefaultVectorApi implements VectorApi {
 		map.add("file", fileResource);
 
 		var response = openAIClient.upload(
-			token,
+			getToken(),
 			map
 		);
 
 		openAIClient.uploadVectorStore(
 			vectorStoreId,
-			token,
+			getToken(),
 			new OpenAIRequestVectorUploadFile(response.id())
 		);
 
@@ -71,12 +73,12 @@ public class DefaultVectorApi implements VectorApi {
 		openAIClient.delete(
 			vectorStoreId,
 			fileId,
-			token
+			getToken()
 		);
 
 		openAIClient.deleteFile(
 			fileId,
-			token
+			getToken()
 		);
 	}
 }

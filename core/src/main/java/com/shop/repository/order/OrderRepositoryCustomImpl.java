@@ -186,7 +186,7 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
 				product.price,
 				orderProduct.quantity,
 
-				payment.totalAmount,
+				payment.totalPrice,
 				payment.deliveryFee,
 				payment.type
 			))
@@ -227,7 +227,7 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
 				product.price,
 				orderProduct.quantity,
 
-				payment.totalAmount,
+				payment.totalPrice,
 				payment.deliveryFee,
 				payment.type
 			))
