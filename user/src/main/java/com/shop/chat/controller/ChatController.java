@@ -11,7 +11,7 @@ import com.shop.response.ApiResult;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/chats")
+@RequestMapping("/chats")
 @RequiredArgsConstructor
 public class ChatController {
 	private final ChatService chatService;

@@ -3,6 +3,8 @@ package com.shop.processor;
 import java.util.Objects;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -15,7 +17,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.annotation.HttpExchange;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+
+import com.shop.interceptor.SimpleApiLoggingInterceptor;
 
 @Component
 public class HttpInterfaceBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
@@ -30,12 +36,8 @@ public class HttpInterfaceBeanFactoryPostProcessor implements BeanFactoryPostPro
 		componentProvider.findCandidateComponents(BASE_PACKAGE).stream()
 			.filter(it -> StringUtils.hasText(it.getBeanClassName()))
 			.forEach(it -> {
-				var interfaceClass = findHttpInterfaceClass(it);
-
-				var baseUrl = resolveBaseUrl(interfaceClass, environment);
-
 				var restClientBuilder = RestClient.builder()
-					.baseUrl(baseUrl)
+					.requestInterceptor(new SimpleApiLoggingInterceptor())
 					.messageConverters(converters -> {
 						var stringConverter = beanFactory.getBean(StringHttpMessageConverter.class);
 						converters.add(stringConverter);
@@ -44,7 +46,8 @@ public class HttpInterfaceBeanFactoryPostProcessor implements BeanFactoryPostPro
 						converters.add(jacksonConverter);
 					}).build();
 
-				beanFactory.registerSingleton(it.getBeanClassName(), restClientBuilder);
+				beanFactory.registerSingleton(it.getBeanClassName(),
+					registerToProxyFactory(beanFactory, it, restClientBuilder));
 			});
 
 	}
@@ -54,6 +57,22 @@ public class HttpInterfaceBeanFactoryPostProcessor implements BeanFactoryPostPro
 			super(false, environment);
 			addIncludeFilter(new AnnotationTypeFilter(HttpExchange.class));
 		}
+
+		@Override
+		protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
+			var metadata = beanDefinition.getMetadata();
+
+			return metadata.isInterface() && metadata.hasAnnotation(HttpExchange.class.getName());
+		}
+	}
+
+	private Object registerToProxyFactory(
+		BeanFactory beanFactory, BeanDefinition beanDefinition, RestClient restClient) {
+		Class<?> interfaceClass = findHttpInterfaceClass(beanDefinition);
+
+		return HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient))
+			.build()
+			.createClient(interfaceClass);
 	}
 
 	private Class<?> findHttpInterfaceClass(BeanDefinition beanDefinition) {
