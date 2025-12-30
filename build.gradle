@@ -1,8 +1,12 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.7'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'org.springframework.boot' version '3.5.7'
+    id 'io.spring.dependency-management' version '1.1.7'
     id 'org.jetbrains.kotlin.jvm'
+}
+
+ext {
+    springAiVersion = "1.1.2"
 }
 
 allprojects {
@@ -14,7 +18,14 @@ allprojects {
 
     repositories {
         mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven {
+            name = 'Central Portal Snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        }
     }
+
 
     tasks.withType(JavaCompile) {
         options.annotationProcessorPath = configurations.annotationProcessor
@@ -31,6 +42,14 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+        implementation platform("org.springframework.ai:spring-ai-bom:$springAiVersion")
+        implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+
+        implementation 'io.micrometer:micrometer-registry-prometheus'
+
+        implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
 
 
         implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
@@ -56,6 +75,12 @@ subprojects {
     }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:$springAiVersion"
+    }
+}
+
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

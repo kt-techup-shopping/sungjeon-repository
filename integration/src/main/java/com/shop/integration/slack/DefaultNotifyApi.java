@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.shop.common.profile.AppProfile;
+import com.shop.profile.AppProfile;
 import com.slack.api.methods.MethodsClient;
 
 import lombok.RequiredArgsConstructor;

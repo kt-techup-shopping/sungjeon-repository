@@ -1,4 +1,8 @@
 spring:
+  config:
+    import: classpath:integration.yml
+  application:
+    name: shopping-openai-api
   datasource:
     url: jdbc:mysql://${db.host:localhost}:3306/${db.scheme:shopping}
     username: ${db.username:root}

@@ -1,12 +1,13 @@
 package com.shop.domain.orderproduct;
 
-import com.shop.common.support.BaseEntity;
 import com.shop.domain.order.Order;
 import com.shop.domain.product.Product;
+import com.shop.support.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +17,10 @@ import lombok.NoArgsConstructor;
 public class OrderProduct extends BaseEntity {
 	private Long quantity;
 
+	@Version
+	private Long version;
+
 	@ManyToOne
-	// @JoinColumn(name = "order_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
 	@JoinColumn(name = "order_id")
 	private Order order;
 
@@ -31,6 +34,8 @@ public class OrderProduct extends BaseEntity {
 		this.quantity = quantity;
 	}
 
-	// 주문생성되면 오더프로덕트도 같이 생성
-
+	// 주문 수정 및 삭제 시
+	public void cancel() {
+		this.isDeleted = true;
+	}
 }

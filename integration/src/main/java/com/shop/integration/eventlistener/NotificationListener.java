@@ -3,8 +3,8 @@ package com.shop.integration.eventlistener;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.shop.common.support.Message;
 import com.shop.integration.slack.NotifyApi;
+import com.shop.support.Message;
 
 import lombok.RequiredArgsConstructor;
 
