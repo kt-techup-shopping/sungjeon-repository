@@ -21,18 +21,22 @@ public class VectorService {
 	@PostConstruct
 	void init() {
 		if (!vectorRepository.existsByType(VectorType.FAQ)) {
+			var name = "FAQ 벡터 스토어";
+			var description = "FAQ 벡터 스토어 입니다";
+			var vectorStoredId = vectorApi.create(name, description);
+
 			create(
-				"faq_vector_store",
-				"FAQ 벡터 스토어",
-				"FAQ 벡터 스토어 입니다",
+				vectorStoredId,
+				name,
+				description,
 				VectorType.FAQ
 			);
 		}
-
 	}
 
 	public void create(String storedId, String name, String description, VectorType type) {
-		vectorRepository.save(new Vector(
+		vectorRepository.save(
+			new Vector(
 				type,
 				storedId,
 				description,

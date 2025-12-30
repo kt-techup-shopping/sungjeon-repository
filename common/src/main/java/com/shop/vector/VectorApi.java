@@ -12,4 +12,6 @@ public interface VectorApi {
 	String uploadFile(String vectorStoreId, byte[] json);
 
 	void delete(String vectorStoreId, String fileId);
+
+	Object search(String vectorStoreId, String query);
 }

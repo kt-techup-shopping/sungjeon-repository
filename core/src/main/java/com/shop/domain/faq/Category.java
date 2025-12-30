@@ -5,7 +5,6 @@ public enum Category {
 	ORDER,
 	PAYMENT,
 	DELIVERY,
-	RETURN,
 	PRODUCT,
 	OTHER
 }

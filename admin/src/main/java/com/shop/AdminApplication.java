@@ -1,4 +1,4 @@
-package com;
+package com.shop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,13 +6,14 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import com.shop.support.Message;
 
 import lombok.RequiredArgsConstructor;
 
 // @ServletComponentScan
-// @EnableJpaAuditing
+@EnableJpaAuditing
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @RequiredArgsConstructor

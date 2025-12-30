@@ -39,7 +39,7 @@ public class OrderController {
 	private final PaymentService paymentService;
 
 	@Operation(summary = "주문 생성", description = "사용자가 상품을 선택하여 주문을 생성합니다.")
-	@GetMapping
+	@PostMapping
 	public ApiResult<Void> createOrder(
 		@AuthenticationPrincipal DefaultCurrentUser currentUser,
 		@RequestBody @Valid OrderCreateRequest request

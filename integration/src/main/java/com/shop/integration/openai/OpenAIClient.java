@@ -16,7 +16,7 @@ import com.shop.integration.openai.response.OpenAIResponseSearch;
 import com.shop.integration.openai.response.OpenAIResponseUpload;
 import com.shop.integration.openai.response.OpenAIResponseVectorCreate;
 
-@HttpExchange(url = "https://api.openai.com/v1", contentType = MediaType.APPLICATION_JSON_VALUE)
+@HttpExchange(contentType = MediaType.APPLICATION_JSON_VALUE)
 public interface OpenAIClient {
 	@PostExchange("/vector_stores")
 	OpenAIResponseVectorCreate create(

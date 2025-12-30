@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 
 import com.shop.integration.openai.request.OpenAIRequestVectorCreate;
+import com.shop.integration.openai.request.OpenAIRequestVectorSearch;
 import com.shop.integration.openai.request.OpenAIRequestVectorUploadFile;
 import com.shop.profile.AppProfile;
 import com.shop.profile.DevProfile;
@@ -29,7 +30,6 @@ public class DefaultVectorApi implements VectorApi {
 	}
 
 	@Override
-
 	public String create(String name, String description) {
 		var response = openAIClient.create(
 			getToken(),
@@ -79,6 +79,15 @@ public class DefaultVectorApi implements VectorApi {
 		openAIClient.deleteFile(
 			fileId,
 			getToken()
+		);
+	}
+
+	@Override
+	public Object search(String vectorStoreId, String query) {
+		return openAIClient.search(
+			vectorStoreId,
+			getToken(),
+			new OpenAIRequestVectorSearch(query)
 		);
 	}
 }

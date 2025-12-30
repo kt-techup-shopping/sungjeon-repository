@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 import org.apache.logging.log4j.util.Strings;
 
+import com.shop.exception.CustomException;
+import com.shop.exception.ErrorCode;
+
 public enum ProductSort {
 	LATEST("latest"),      // 최신순
 	PRICE_ASC("price_asc"),    // 가격 낮은순

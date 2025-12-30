@@ -15,7 +15,9 @@ import com.shop.integration.openai.request.OpenAIRequestVectorSearch;
 import com.shop.integration.openai.response.OpenAIResponseSearchData;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class OpenAICustomAdvisor implements BaseAdvisor {
@@ -27,20 +29,34 @@ public class OpenAICustomAdvisor implements BaseAdvisor {
 	public ChatClientRequest before(ChatClientRequest chatClientRequest, AdvisorChain advisorChain) {
 		var prompt = chatClientRequest.prompt();
 		var message = prompt.getUserMessage().getText();
+		log.info("Advisor Input Message: {}", message);
+
 		var candidateAnswers = new ArrayList<OpenAIResponseSearchData>();
 
 		var parsing = message.split(":");
+		// 입력 포맷 검증 로그
+		if (parsing.length < 2) {
+			log.warn("Invalid message format. Expected 'id:query', but got: {}", message);
+		}
 
-		var request = new OpenAIRequestVectorSearch(parsing[1]);
+		// 검색어 앞뒤 공백 제거
+		var request = new OpenAIRequestVectorSearch(parsing[1].trim());
 
 		var ids = parsing[0].split(",");
 
 		Arrays.stream(ids).forEach(id -> {
-			var response = openAIClient.search(parsing[0], String.format("Bearer %s", openAIProperties.apiKey()), request);
+			// 수정: parsing[0] 대신 개별 id 사용 및 로그 추가
+			log.info("Searching Vector Store ID: {}", id);
+			var response = openAIClient.search(id, String.format("Bearer %s", openAIProperties.apiKey()), request);
 
 			var searchData = response.data().stream().max(Comparator.comparingDouble(OpenAIResponseSearchData::score)).orElse(
 				new OpenAIResponseSearchData("", "", 0.0, null, null)
 			);
+			log.info("Search Result for ID {}: Score={}, Data={}", id, searchData.score(), searchData);
+
+			if (searchData.content().isEmpty()) {
+				log.warn("Warning: Search data contents are empty! The chatbot will not receive any context.");
+			}
 
 			candidateAnswers.add(searchData);
 		});
@@ -51,7 +67,8 @@ public class OpenAICustomAdvisor implements BaseAdvisor {
 				new OpenAIResponseSearchData("", "", 0.0, null, null)
 			);
 
-		var newPrompt = prompt.augmentSystemMessage(topScoreSearchData.contents().toString());
+		log.info("Best Match File ID: {}, Score: {}", topScoreSearchData.fileId(), topScoreSearchData.score());
+		var newPrompt = prompt.augmentSystemMessage(topScoreSearchData.content().toString());
 
 		return chatClientRequest.mutate()
 			.prompt(newPrompt)

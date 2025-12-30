@@ -30,6 +30,7 @@ public class SecurityConfiguration {
 		"/api/health/**", "/swagger-ui/**", "/v3/api-docs/**",
 		"/products", "/products/*", "/cart/**",
 		"/reviews", "/reviews/user", "/reviews/single",
+		"/chats/**"
 	};
 	private static final String[] POST_PERMIT_ALL = {
 		"/auth/login", "/auth/refresh",

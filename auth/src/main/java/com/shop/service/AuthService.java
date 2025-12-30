@@ -4,13 +4,13 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shop.CustomException;
-import com.shop.ErrorCode;
-import com.shop.Preconditions;
 import com.shop.domain.user.Status;
 import com.shop.encoder.PasswordEncoder;
+import com.shop.exception.CustomException;
+import com.shop.exception.ErrorCode;
 import com.shop.jwt.JwtService;
 import com.shop.repository.user.UserRepository;
+import com.shop.support.Preconditions;
 
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
