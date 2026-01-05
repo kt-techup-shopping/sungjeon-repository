@@ -78,8 +78,8 @@ public class OpenAICustomAdvisor implements BaseAdvisor {
 			systemMessage = "사용자의 질문에 대한 정확한 정보를 찾을 수 없습니다. '사용자의 질문에 대한 정확한 정보를 찾을 수 없습니다.'라고 답변해주세요.";
 		} else {
 			systemMessage = topScoreSearchData.content().toString();
-			;
 		}
+		// var systemMessage = topScoreSearchData.content().toString();
 
 		var newPrompt = prompt.augmentSystemMessage(systemMessage);
 
