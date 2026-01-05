@@ -17,6 +17,7 @@ public class FAQ extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Category category;
 	private String fileId;
+	private final String createdBy = "ADMIN";
 
 	public FAQ(String title, String content, Category category) {
 		this.title = title;

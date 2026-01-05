@@ -14,12 +14,12 @@ public record FAQResponseSearchData(
 	List<FAQResponseContent> content
 ) {
 	public static FAQResponseSearchData of(String fileId, String filename, Double score,
-		OpenAIResponseAttribute attribute, String textContent) {
+		OpenAIResponseAttribute attributes, String textContent) {
 		return new FAQResponseSearchData(
 			fileId,
 			filename,
 			score,
-			attribute,
+			attributes,
 			List.of(FAQResponseContent.text(textContent))
 		);
 	}
